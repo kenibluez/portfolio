@@ -1,0 +1,139 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header>
+  <div class="wrapper">
+    <p class="logo">
+      <a href="./">kenibluez@portfolio.os</a>
+    </p>
+
+    <div class="quick-links">
+      <div class="quick">
+        <Icon name="lucide:user" color="var(--accent)" size="1.1em" />
+        <p>About</p>
+      </div>
+      <div class="quick">
+        <Icon name="lucide:folder-open" color="var(--accent)" size="1.1em" />
+        <p>Projects</p>
+      </div>
+      <div class="quick">
+        <Icon
+          name={"lucide:briefcase-business"}
+          color="var(--accent)"
+          size="1.1em"
+        />
+        <p>Experience</p>
+      </div>
+      <div class="quick">
+        <Icon color="var(--accent)" name="lucide:book-open" size="1.1em" />
+        <p>Blog</p>
+      </div>
+    </div>
+
+    <div class="external">
+      <div class="available">
+        <div class="available-dot"></div>
+        <p class="available-txt">Available</p>
+      </div>
+      <div class="profiles">
+        <Icon name="lucide:github" color="var(--accent)" size="1.3em" />
+        <Icon name="lucide:linkedin" color="var(--accent)" size="1.3em" />
+        <Icon name="lucide:mail" color="var(--accent)" size="1.3em" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 25, 50, 0.435);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: var(--accent) 0.15em solid;
+    padding-block: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: clamp(1rem, 5vw, 5rem);
+  }
+
+  header p {
+    margin: 0;
+  }
+
+  .logo a {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: bold;
+    text-shadow: 0 0 0.5rem var(--accent);
+    font-size: var(--fs-md);
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+  }
+
+  .quick-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 3.5rem);
+    color: var(--accent);
+  }
+
+  .quick {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .quick p {
+    font-size: var(--fs-sm);
+  }
+
+  .external {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 2rem);
+  }
+
+  .available {
+    display: flex;
+    align-items: center;
+    justify-items: space-between;
+    border: 0.15rem var(--primary) solid;
+    padding-inline: 0.8rem;
+    padding-block: 0.3rem;
+    border-radius: 999px;
+    gap: 0.4rem;
+    box-shadow: 0 0 0.5rem var(--primary);
+  }
+  .available-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+    background: var(--primary);
+    box-shadow: 0 0 0.5rem var(--primary);
+  }
+  .available-txt {
+    color: var(--primary);
+    text-shadow: 0 0 0.5rem var(--primary);
+    font-size: var(--fs-sm);
+  }
+  .profiles {
+    border-left: 0.1rem solid var(--foreground);
+    padding-left: clamp(1rem, 2vw, 2rem);
+    display: flex;
+    gap: 1rem;
+  }
+</style>
