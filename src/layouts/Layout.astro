@@ -6,7 +6,7 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>kenibluez</title>
 	</head>
 	<body>
 		<slot />
@@ -14,10 +14,33 @@
 </html>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+	
 	html,
 	body {
 		margin: 0;
+		padding: 0;
 		width: 100%;
 		height: 100%;
+		background: var(--background);
+		color: var(--foreground);
+	}
+	* {
+		--background: rgb(5, 5, 6);
+		--accent: #245bff;
+		--foreground: rgb(65, 85, 136);
+		--primary: #0091ff;
+		--secondary: #2e2eff;
+
+		/* Font Scale */
+		--fs-sm: clamp(0.7rem, 0.1vw + 0.7rem, 0.75rem);
+		--fs-md: clamp(0.75rem, 0.15vw + 0.75rem, 0.85rem);
+		--fs-base: clamp(0.85rem, 0.2vw + 0.8rem, 0.95rem);
+		--fs-lg: clamp(1.1rem, 0.5vw + 1rem, 1.3rem);
+		--fs-xl: clamp(1.5rem, 1vw + 1.2rem, 2.2rem);
+
+		font-family: "Victor Mono", monospace;
+		font-size: var(--fs-base);
 	}
 </style>
