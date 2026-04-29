@@ -1,0 +1,175 @@
+---
+import Badge from "../components/Badge.astro"
+---
+
+<section class="hero-container">
+  <div class="hero-wrapper">
+    <div class="terminal-side">
+      <div class="hero-terminal">
+        <div class="terminal-header">
+          <span class="prompt">kenibluez@portfolio:~$</span>
+          <span class="command">ls -lah ./hero-section</span>
+        </div>
+        <pre
+          class="ascii-art">
+  ██╗  ██╗ ██████╗ ██╗    ██╗██████╗ ██╗   ██╗██████╗     ██╗███╗   ███╗        
+  ██║  ██║██╔═══██╗██║    ██║██╔══██╗╚██╗ ██╔╝╚════██╗    ██║████╗ ████║        
+  ███████║██║   ██║██║ █╗ ██║██║  ██║ ╚████╔╝   ▄███╔╝    ██║██╔████╔██║        
+  ██╔══██║██║   ██║██║███╗██║██║  ██║  ╚██╔╝    ▀▀══╝     ██║██║╚██╔╝██║        
+  ██║  ██║╚██████╔╝╚███╔███╔╝██████╔╝   ██║     ██╗       ██║██║ ╚═╝ ██║        
+  ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚═════╝    ╚═╝     ╚═╝       ╚═╝╚═╝     ╚═╝        
+                                                                                
+  ██╗  ██╗███████╗███╗   ██╗███╗   ██╗███████╗████████╗██╗  ██╗                 
+  ██║ ██╔╝██╔════╝████╗  ██║████╗  ██║██╔════╝╚══██╔══╝██║  ██║                 
+  █████╔╝ █████╗  ██╔██╗ ██║██╔██╗ ██║█████╗     ██║   ███████║                 
+  ██╔═██╗ ██╔══╝  ██║╚██╗██║██║╚██╗██║██╔══╝     ██║   ██╔══██║                 
+  ██║  ██╗███████╗██║ ╚████║██║ ╚████║███████╗   ██║   ██║  ██║                 
+  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝                 
+        </pre>
+      </div>
+    </div>
+
+    <div class="text-side">
+      <h1>I like to build stuff</h1>
+      <p class="sub">and never stop learning</p>
+
+      <p>
+        Explore my journey as a Software Developer and Tech
+        Enthusiast!
+      </p>
+      <div class="interests">
+        <Badge>Software Engineer</Badge>
+        <Badge>Tech Enthusiast</Badge>
+        <Badge>Game Dev Explorer</Badge>
+        <Badge>Lifelong Learner</Badge>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-block: clamp(4rem, 15vh, 8rem);
+    padding-inline: clamp(1rem, 5vw, 5rem);
+    box-sizing: border-box;
+  }
+  .hero-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Aligned to top */
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 6rem);
+    width: 100%;
+    max-width: 1600px;
+  }
+
+  .terminal-side {
+    flex: 1.4;
+    min-width: 0;
+  }
+
+  .hero-terminal {
+    padding: 2rem;
+    background: rgba(10, 25, 50, 0.3);
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    box-shadow: 0 0 2rem rgba(36, 91, 255, 0.2);
+    overflow: hidden;
+  }
+
+  .text-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Aligned to top */
+    text-align: left;
+    height: 100%;
+  }
+
+  .text-side h1 {
+    font-size: clamp(2rem, 3rem + 2vw, 6rem);
+    font-family: var(--font-accent);
+    color: var(--primary);
+    text-shadow: 0 0 1rem var(--primary);
+    margin: 0;
+    font-weight: 900;
+    line-height: 1.1;
+    font-variant: small-caps;
+  }
+
+  .text-side p.sub {
+    font-size: var(--fs-lg);
+    color: var(--accent);
+    margin-top: 0.2rem;
+    opacity: 0.9;
+    text-shadow: 0 0 0.5rem var(--accent);
+    font-style: italic;
+  }
+
+  .terminal-header {
+    margin-bottom: 1.5rem;
+    font-size: var(--fs-md);
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .prompt {
+    color: var(--primary);
+    text-shadow: 0 0 0.5rem var(--primary);
+  }
+
+  .command {
+    color: var(--foreground);
+    margin-left: 0.5rem;
+  }
+
+  .ascii-art {
+    margin: 0;
+    color: var(--accent);
+    text-shadow: 0 0 0.8rem var(--accent);
+    line-height: 1.1;
+    text-align: left;
+
+    font-size: clamp(3px, 1vw, 14px);
+
+    overflow: hidden;
+    white-space: pre;
+  }
+
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    row-gap: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero-wrapper {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
+    }
+    .text-side {
+      text-align: center;
+    }
+    .ascii-art {
+      font-size: clamp(4px, 1.8vw, 12px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .ascii-art {
+      font-size: 2vw;
+    }
+    .hero-terminal {
+      padding: 1rem;
+    }
+    .text-side h1 {
+      /* font-size: var(--fs-lg); */
+    }
+  }
+</style>
