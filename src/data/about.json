@@ -1,0 +1,13 @@
+{
+  "info": {
+    "name": { "tag": "h1", "value": "Kenneth Herrera" },
+    "nickname": { "tag": "h3", "value": "kenibluez" },
+    "title": { "tag": "p", "value": "Software Engineer" },
+    "location": { "tag": "p", "value": "Chinandega, Nicaragua" },
+    "dob": { "tag": "span", "value": "Born in 2006-07-14" }
+  },
+  "interests": {
+    "tag": "ul",
+    "items": ["Web Development", "3D Graphics", "Open Source"]
+  }
+}

@@ -1,0 +1,168 @@
+---
+import portrait from "../assets/portrait.txt?raw";
+import aboutData from "../data/about.json";
+
+const { info, interests } = aboutData;
+---
+
+<section id="about" class="about">
+  <pre id="portrait-data" style="display:none" set:html={portrait}></pre>
+  <div class="about__visual">
+    <canvas id="particle-canvas"></canvas>
+  </div>
+
+  <div class="about__content">
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="prompt">kenibluez@portfolio:~$</span>
+        <span class="command">cat about-me.html</span>
+      </div>
+      <div class="terminal-body">
+        {Object.entries(info).map(([id, data]) => (
+          <div class="code-line">
+            <span class="tag">{`<${data.tag} id="${id}">`}</span>
+            <span class="content">{data.value}</span>
+            <span class="tag">{`</${data.tag}>`}</span>
+          </div>
+        ))}
+        
+        <div class="code-line">
+          <span class="tag">{`<${interests.tag} id="interests">`}</span>
+        </div>
+        
+        {interests.items.map((item, index) => (
+          <div class="code-line">
+            <span class="content">  </span>
+            <span class="tag">{`<li id="interest-${index}">`}</span>
+            <span class="content-interest">{item}</span>
+            <span class="tag">{"</li>"}</span>
+          </div>
+        ))}
+        
+        <div class="code-line">
+          <span class="tag">{`</${interests.tag}>`}</span>
+        </div>
+      </div>
+    </div>
+    
+    <a href="#contact" class="cta">Get in touch →</a>
+  </div>
+</section>
+
+<script>
+  import { initParticlePortrait } from "../scripts/particlePortrait";
+
+  const canvas = document.getElementById("particle-canvas") as HTMLCanvasElement | null;
+  const portraitData = document.getElementById("portrait-data");
+
+  if (canvas && portraitData && portraitData.textContent) {
+    initParticlePortrait(canvas, portraitData.textContent);
+  }
+</script>
+
+<style>
+  .about {
+    min-height: 60vh;
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    padding: 6rem 2rem;
+    width: 100%;
+  }
+
+  .about__visual,
+  .about__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .about__visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+  }
+
+  #particle-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Terminal Styles */
+  .terminal {
+    background: rgba(10, 25, 50, 0.3);
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    box-shadow: 0 0 2rem rgba(36, 91, 255, 0.15);
+    overflow: hidden;
+    font-family: var(--font-accent);
+    margin-bottom: 2rem;
+  }
+
+  .terminal-header {
+    background: rgba(36, 91, 255, 0.1);
+    padding: 0.75rem 1.2rem;
+    border-bottom: 1px solid rgba(36, 91, 255, 0.3);
+    font-size: var(--fs-md);
+  }
+
+  .prompt {
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  .command {
+    color: var(--foreground);
+    margin-left: 0.5rem;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .code-line {
+    font-size: var(--fs-base);
+    white-space: pre-wrap;
+    line-height: 1.4;
+  }
+
+  /* Syntax Highlighting */
+  .tag {
+    color: var(--foreground);
+  }
+
+  .content {
+    color: var(--primary);
+    text-shadow: 0 0 0.5rem var(--primary);
+  }
+
+  .content-interest {
+    color: var(--accent);
+    text-shadow: 0 0 0.5rem var(--accent);
+  }
+
+  /* CTA styles */
+  .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid currentColor;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .cta:hover {
+    background: currentColor;
+    color: #000;
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      flex-direction: column;
+    }
+  }
+</style>
