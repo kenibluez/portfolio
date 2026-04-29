@@ -1,3 +1,8 @@
+---
+import CRTOverlay from '../components/CRTOverlay.astro';
+import Header from '../components/Header.astro';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -9,7 +14,11 @@
 		<title>kenibluez</title>
 	</head>
 	<body>
-		<slot />
+		<Header />
+		<CRTOverlay />
+		<main class="main-container">
+			<slot />
+		</main>
 	</body>
 </html>
 
@@ -25,13 +34,51 @@
 		height: 100%;
 		background: var(--background);
 		color: var(--foreground);
+		overflow-x: hidden;
 	}
+
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.main-container {
+		width: 100%;
+		max-width: 1400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex: 1;
+		animation: flicker 20s infinite;
+		position: relative;
+		z-index: 2; /* Sit on top of CRT overlay */
+	}
+
+	@keyframes flicker {
+		/* Quick subtle flicker at the start of the 20s cycle */
+		0% { opacity: 0.995; }
+		0.5% { opacity: 0.985; }
+		1% { opacity: 0.998; }
+		1.5% { opacity: 0.988; }
+		2% { opacity: 0.995; }
+		2.5% { opacity: 0.990; }
+		3% { opacity: 0.999; }
+		3.5% { opacity: 0.987; }
+		4% { opacity: 0.995; }
+		4.5% { opacity: 0.989; }
+		5% { opacity: 1.0; }
+		/* Solid for the remaining 95% of the time */
+		100% { opacity: 1.0; }
+	}
+
 	* {
 		--background: rgb(5, 5, 6);
 		--accent: #245bff;
 		--foreground: rgb(65, 85, 136);
 		--primary: #0091ff;
-		--secondary: #2e2eff;
+		--secondary: #582eff;
 
 		/* Font Scale */
 		--fs-sm: clamp(0.7rem, 0.1vw + 0.7rem, 0.75rem);
@@ -39,6 +86,7 @@
 		--fs-base: clamp(0.85rem, 0.2vw + 0.8rem, 0.95rem);
 		--fs-lg: clamp(1.1rem, 0.5vw + 1rem, 1.3rem);
 		--fs-xl: clamp(1.5rem, 1vw + 1.2rem, 2.2rem);
+		--font-accent: "Jetbrains Mono", monospace;
 
 		font-family: "Victor Mono", monospace;
 		font-size: var(--fs-base);

@@ -49,10 +49,11 @@ import { Icon } from "astro-icon/components";
   header {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(10, 25, 50, 0.435);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    width: 100%;
+    z-index: 10001;
+    background: rgba(6, 29, 69, 0.237);
+    backdrop-filter: blur(0.1rem);
+    -webkit-backdrop-filter: blur(0.1rem);
     border-bottom: var(--accent) 0.15em solid;
     padding-block: 0.5rem;
 
@@ -69,9 +70,10 @@ import { Icon } from "astro-icon/components";
   .logo a {
     text-decoration: none;
     color: var(--accent);
-    font-weight: bold;
+    font-weight: 900;
     text-shadow: 0 0 0.5rem var(--accent);
     font-size: var(--fs-md);
+    font-family: var(--font-accent);
   }
 
   .wrapper {

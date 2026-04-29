@@ -1,0 +1,85 @@
+<div class="crt-container">
+  <div class="scanlines"></div>
+  <div class="beam"></div>
+</div>
+
+<style>
+  .crt-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1; /* Moved behind the main content */
+  }
+
+  /* Scanlines effect - made more subtle */
+  .scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.15) 50%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.04),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 0, 255, 0.083)
+    );
+    background-size: 100% 0.4rem, 0.4rem 100%;
+    z-index: 2;
+  }
+
+  /* Moving beam effect - lightened */
+  .beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(36, 91, 255, 0) 40%,
+      rgba(36, 91, 255, 0.02) 45%,
+      rgba(36, 91, 255, 0.04) 50%,
+      rgba(36, 91, 255, 0.02) 55%,
+      rgba(36, 91, 255, 0) 60%,
+      transparent
+    );
+    background-size: 100% 200%;
+    animation: scan 15s linear infinite;
+    z-index: 3;
+  }
+
+  @keyframes scan {
+    from {
+      background-position: 0 -100%;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  /* Subtle vignette - reduced intensity to keep text bright */
+  .crt-container::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: radial-gradient(
+      rgba(0, 4, 129, 0.142) 50%,
+      rgba(5, 2, 26, 0.189) 80%
+    );
+    z-index: 4;
+  }
+</style>
