@@ -42,8 +42,83 @@ import { Icon } from "astro-icon/components";
         <Icon name="lucide:mail" color="var(--accent)" size="1.3em" />
       </div>
     </div>
+
+    <button class="hamburger" aria-label="Open menu">
+      <Icon name="lucide:menu" color="var(--accent)" size="1.8em" />
+    </button>
   </div>
+
+  <div class="sidebar-overlay"></div>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <button class="close-sidebar" aria-label="Close menu">
+        <Icon name="lucide:x" color="var(--accent)" size="1.8em" />
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <div class="sidebar-links">
+        <div class="quick">
+          <Icon name="lucide:user" color="var(--accent)" size="1.2em" />
+          <p>About</p>
+        </div>
+        <div class="quick">
+          <Icon name="lucide:folder-open" color="var(--accent)" size="1.2em" />
+          <p>Projects</p>
+        </div>
+        <div class="quick">
+          <Icon
+            name={"lucide:briefcase-business"}
+            color="var(--accent)"
+            size="1.2em"
+          />
+          <p>Experience</p>
+        </div>
+        <div class="quick">
+          <Icon color="var(--accent)" name="lucide:book-open" size="1.2em" />
+          <p>Blog</p>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="available">
+          <div class="available-dot"></div>
+          <p class="available-txt">Available</p>
+        </div>
+        <div class="profiles">
+          <Icon name="lucide:github" color="var(--accent)" size="1.5em" />
+          <Icon name="lucide:linkedin" color="var(--accent)" size="1.5em" />
+          <Icon name="lucide:mail" color="var(--accent)" size="1.5em" />
+        </div>
+      </div>
+    </div>
+  </nav>
 </header>
+
+<script>
+  const hamburger = document.querySelector(".hamburger");
+  const closeBtn = document.querySelector(".close-sidebar");
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.querySelector(".sidebar-overlay");
+
+  function toggleSidebar() {
+    sidebar?.classList.toggle("active");
+    overlay?.classList.toggle("active");
+    document.body.style.overflow = sidebar?.classList.contains("active")
+      ? "hidden"
+      : "";
+  }
+
+  hamburger?.addEventListener("click", toggleSidebar);
+  closeBtn?.addEventListener("click", toggleSidebar);
+  overlay?.addEventListener("click", toggleSidebar);
+
+  // Close sidebar on link click
+  const links = document.querySelectorAll(".sidebar-links .quick");
+  links.forEach((link) => {
+    link.addEventListener("click", toggleSidebar);
+  });
+</script>
 
 <style>
   header {
@@ -97,7 +172,14 @@ import { Icon } from "astro-icon/components";
     justify-content: space-between;
     align-items: center;
     gap: 0.4rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
   }
+
+  .quick:hover {
+    opacity: 0.8;
+  }
+
   .quick p {
     font-size: var(--fs-sm);
   }
@@ -119,6 +201,7 @@ import { Icon } from "astro-icon/components";
     border-radius: 999px;
     gap: 0.4rem;
     box-shadow: 0 0 0.5rem var(--primary);
+    max-width: fit-content;
   }
   .available-dot {
     width: 0.4rem;
@@ -137,5 +220,115 @@ import { Icon } from "astro-icon/components";
     padding-left: clamp(1rem, 2vw, 2rem);
     display: flex;
     gap: 1rem;
+  }
+
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  /* Sidebar Styles */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10002;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(1, 11, 30, 0.515);
+    border-left: 0.15rem solid var(--accent);
+    z-index: 10003;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10rem);
+    --webkit-backdrop-filter: blur(10rem);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .close-sidebar {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 2rem;
+    justify-content: space-between;
+  }
+
+  .sidebar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sidebar-links .quick {
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .sidebar-links .quick p {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+  }
+
+  .sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .sidebar-footer .profiles {
+    border-left: none;
+    padding-left: 0;
+    justify-content: space-around;
+  }
+
+  @media (max-width: 900px) {
+    .quick-links,
+    .external {
+      display: none;
+    }
+
+    .hamburger {
+      display: block;
+    }
   }
 </style>
