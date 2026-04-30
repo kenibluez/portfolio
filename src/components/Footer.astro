@@ -1,0 +1,76 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="ftr">
+  <div class="ftr__inner">
+    <div class="ftr__cmd">
+      <span class="ftr__cmd-prompt">kenibluez@portfolio:~$</span>
+      <span class="ftr__cmd-cmd">basename</span>
+      <span class="ftr__cmd-txt">~/keni</span>
+      <span class="ftr__cmd-cmd">& echo</span>
+      <span class="ftr__cmd-txt">"© {year}."</span>
+      <span class="ftr__cmd-cursor"></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    border-top: 0.15rem solid var(--accent);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: rgba(1, 5, 14, 0.463);
+    backdrop-filter: blur(0.25rem);
+    -webkit-backdrop-filter: blur(0.25rem);
+    z-index: 10001;
+    padding-block: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ftr__inner {
+    width: 100%;
+    max-width: 1400px;
+    padding-inline: clamp(1rem, 5vw, 5rem);
+  }
+
+  .ftr__cmd {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-accent);
+    font-size: var(--fs-sm);
+  }
+
+  .ftr__cmd-prompt {
+    color: var(--primary);
+  }
+
+  .ftr__cmd-cmd {
+    color: var(--secondary);
+  }
+
+  .ftr__cmd-txt {
+    color: var(--foreground);
+  }
+
+  .ftr__cmd-cursor {
+    display: inline-block;
+    width: 0.5rem;
+    height: 1rem;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .ftr__cmd-prompt, .ftr__cmd-cmd:first-of-type, .ftr__cmd-txt:first-of-type {
+      display: none;
+    }
+  }
+</style>
