@@ -1,0 +1,311 @@
+---
+import experience from "../data/experience.json";
+import Badge from "../components/Badge.astro";
+---
+
+<section class="exp" id="experience">
+  <div class="exp__container">
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="prompt">kenibluez@portfolio:~$</span>
+        <span class="command">ls -la ./experience</span>
+      </div>
+      <div class="terminal-body">
+        <aside class="exp__sidebar">
+          <nav class="exp__nav">
+            {
+              experience.map((role, i) => (
+                <button
+                  class={`exp__tab ${i === 0 ? "active" : ""}`}
+                  data-index={i}
+                >
+                  <span class="exp__tab-title">{role.title}</span>
+                  <span class="exp__tab-duration">{role.org}</span>
+                </button>
+              ))
+            }
+          </nav>
+        </aside>
+        <div class="exp__details">
+          {
+            experience.map((role, i) => (
+              <div
+                class={`exp__panel ${i === 0 ? "active" : ""}`}
+                id={`panel-${i}`}
+              >
+                <div class="exp__panel-header">
+                  <span class="prompt">kenibluez@portfolio:~$</span>
+                  <span class="command">{role.cmd}</span>
+                </div>
+                <h3 class="exp__title">{role.title}</h3>
+                <p class="exp__period">{role.period}</p>
+                <p class="exp__subtitle">{role.subtitle}</p>
+                <ul class="exp__bullets">
+                  {role.bullets.map((bullet) => (
+                    <li class="exp__bullets-info" set:html={bullet} />
+                  ))}
+                </ul>
+                <div class="exp__skills">
+                  {role.skills.map((skill) => (
+                    <Badge>{skill}</Badge>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll(".exp__tab");
+  const panels = document.querySelectorAll(".exp__panel");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const index = tab.getAttribute("data-index");
+
+      tabs.forEach((t) => t.classList.remove("active"));
+      panels.forEach((p) => p.classList.remove("active"));
+
+      tab.classList.add("active");
+      const targetPanel = document.getElementById(`panel-${index}`);
+      if (targetPanel) targetPanel.classList.add("active");
+    });
+  });
+</script>
+
+<style>
+  .exp {
+    padding: 6rem 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .terminal {
+    background: rgba(6, 10, 16, 0.5);
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    box-shadow: 0 0 2rem rgba(36, 91, 255, 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .terminal-header {
+    background: rgba(36, 91, 255, 0.1);
+    padding: 0.75rem 1.2rem;
+    border-bottom: 1px solid rgba(36, 91, 255, 0.3);
+    font-size: var(--fs-md);
+  }
+
+  .terminal-body {
+    display: flex;
+    min-height: 450px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .exp__sidebar {
+    width: 280px;
+    border-right: 1px solid rgba(36, 91, 255, 0.2);
+    background: rgba(36, 91, 255, 0.05);
+  }
+
+  .exp__nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .exp__tab {
+    background: transparent;
+    border: none;
+    border-left: 4px solid transparent;
+    padding: 1.25rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    color: var(--foreground);
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--font-accent);
+  }
+
+  .exp__tab:hover {
+    background: rgba(36, 91, 255, 0.08);
+    color: var(--primary);
+  }
+
+  .exp__tab.active {
+    background: var(--accent);
+    border-left-color: var(--primary);
+    font-family: var(--font-accent);
+    color: var(--background);
+  }
+
+  .exp__tab-title {
+    font-weight: 700;
+    font-size: var(--fs-base);
+    letter-spacing: 0.5px;
+  }
+
+  .exp__title {
+    font-family: var(--font-accent);
+    font-weight: 900;
+  }
+  
+  .exp__tab-duration {
+    font-size: var(--fs-sm);
+    opacity: 0.6;
+  }
+  
+  .exp__details {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+  
+  .exp__panel {
+    display: none;
+  }
+  
+  .exp__panel.active {
+    display: block;
+    animation: terminalFade 0.4s ease-out;
+  }
+  
+  @keyframes terminalFade {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .exp__panel-header {
+    margin-bottom: 2rem;
+    font-size: var(--fs-md);
+    opacity: 0.8;
+  }
+
+  .exp__panel h3 {
+    color: var(--primary);
+    font-size: var(--fs-lg);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 145, 255, 0.3);
+  }
+
+  .exp__period {
+    color: var(--accent);
+    font-size: var(--fs-md);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .exp__subtitle {
+    font-style: italic;
+    margin-bottom: 2rem;
+    color: var(--foreground);
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  .exp__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+  }
+
+  
+  
+  .exp__bullets li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--foreground);
+  }
+  
+  .exp__bullets li::before {
+    content: "➜";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.9em;
+  }
+  
+  .exp__bullets-info :global(em) {
+    color: white;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .exp__bullets-info :global(strong) {
+    color: var(--accent) !important;
+    font-weight: 900;
+  }
+  
+  .exp__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .prompt {
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  .command {
+    color: var(--foreground);
+    margin-left: 0.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .terminal-body {
+      flex-direction: column;
+    }
+
+    .exp__sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid rgba(36, 91, 255, 0.2);
+    }
+
+    .exp__nav {
+      flex-direction: row;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .exp__nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .exp__tab {
+      border-left: none;
+      border-bottom: 4px solid transparent;
+      padding: 1rem 1.5rem;
+      min-width: fit-content;
+    }
+
+    .exp__tab.active {
+      border-bottom-color: var(--primary);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .exp {
+      padding: 4rem 1rem;
+    }
+
+    .exp__details {
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>

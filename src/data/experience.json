@@ -1,0 +1,48 @@
+[
+  {
+    "key": "developer-internship-keiser",
+    "title": "Developer Internship",
+    "subtitle": "Automation, Integration, and Frontend Development",
+    "org": "Keiser University Latin American Campus",
+    "period": "Jul 2024 - Oct 2024",
+    "cmd": "npm run dev -- --automation --integration --ui",
+    "bullets": [
+      "Automation using <strong>n8n</strong> with <em>generative AI</em> to generate reports and delivery of newsletters to staff.",
+      "Use of <em>AI models</em> to analyze and extract insights from documents and porting to <strong>JSON</strong> format.",
+      "Develop and maintain an avatar documentation system using <strong>React</strong> and <em>TypeScript</em> with a <strong>Laravel</strong> backend."
+    ],
+    "skills": [
+      "React Development",
+      "Laravel",
+      "GoogleGenAI",
+      "Python",
+      "PHP and TypeScript"
+    ]
+  },
+  {
+    "key": "ta-software-keiser",
+    "title": "Teaching Assistant - Software Engineering",
+    "subtitle": "Supporting Students in the Software Engineering Career",
+    "org": "Keiser University Latin American Campus",
+    "period": "Jan 2025 - Apr 2026",
+    "cmd": "cat syllabus.txt | grep -i 'Software Engineering'",
+    "bullets": [
+      "Assisted professors at  in delivering coursework for <strong>Python Programming</strong>, <strong>Database Management Systems</strong>, and <strong>Theory of Computation</strong>.",
+      "Provided <strong>Python tutoring sessions</strong> to students, reinforcing core programming concepts and problem-solving skills.",
+      "Supported the development and grading of <strong>course assignments</strong>, ensuring clarity, correctness, and alignment with academic objectives.",
+      "Collaborated in the creation of <strong>educational materials</strong> for Web Development courses using <em>JavaScript</em>, <em>Node.js</em>, <em>Express</em>, <em>HTML</em>, <em>CSS</em>, and authentication methods like <em>JWT</em>, <em>Cookies</em>, and <em>Sessions</em>.",
+      "Contributed to study content for <strong>Cross-Platform Development</strong> using <em>React Native</em> and the <em>Expo</em> framework."
+    ],
+    "skills": [
+      "Teaching Assistance",
+      "Python Programming",
+      "Database Management Systems",
+      "Theory of Computation",
+      "Web Development (JavaScript, Node.js, Express, HTML, CSS)",
+      "Authentication (JWT, Cookies, Sessions)",
+      "React Native and Expo",
+      "Technical Tutoring",
+      "Educational Content Development"
+    ]
+  }
+]

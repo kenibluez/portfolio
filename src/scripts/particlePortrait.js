@@ -90,7 +90,7 @@ export function initParticlePortrait(canvas, portrait) {
 
   const material = new THREE.PointsMaterial({
     color: 0x245bff,
-    size: 2, 
+    size: 1.5, 
     transparent: true,
     opacity: 0.8,
     // sizeAttenuation: true,
