@@ -1,12 +1,13 @@
 ---
 import portrait from "../assets/portrait.txt?raw";
 import aboutData from "../data/about.json";
+import Badge from "../components/Badge.astro";
 
-const { info, interests } = aboutData;
+const { info, interests, about, techStack } = aboutData;
 ---
 
 <section id="about" class="about">
-  <pre id="portrait-data" style="display:none" set:html={portrait}></pre>
+  <pre id="portrait-data" style="display:none" set:html={portrait} />
   <div class="about__visual">
     <canvas id="particle-canvas"></canvas>
   </div>
@@ -15,44 +16,64 @@ const { info, interests } = aboutData;
     <div class="terminal">
       <div class="terminal-header">
         <span class="prompt">kenibluez@portfolio:~$</span>
-        <span class="command">cat about-me.html</span>
+        <span class="command">cat info.html</span>
       </div>
       <div class="terminal-body">
-        {Object.entries(info).map(([id, data]) => (
-          <div class="code-line">
-            <span class="tag">{`<${data.tag} id="${id}">`}</span>
-            <span class="content">{data.value}</span>
-            <span class="tag">{`</${data.tag}>`}</span>
-          </div>
-        ))}
-        
+        {
+          Object.entries(info).map(([id, data]) => (
+            <div class="code-line">
+              <span class="tag">{`<${data.tag} id="${id}">`}</span>
+              <span class="content">{data.value}</span>
+              <span class="tag">{`</${data.tag}>`}</span>
+            </div>
+          ))
+        }
+
         <div class="code-line">
           <span class="tag">{`<${interests.tag} id="interests">`}</span>
         </div>
-        
-        {interests.items.map((item, index) => (
-          <div class="code-line">
-            <span class="content">  </span>
-            <span class="tag">{`<li id="interest-${index}">`}</span>
-            <span class="content-interest">{item}</span>
-            <span class="tag">{"</li>"}</span>
-          </div>
-        ))}
-        
+
+        {
+          interests.items.map((item, index) => (
+            <div class="code-line">
+              <span class="content"> </span>
+              <span class="tag">{`<li id="interest-${index}">`}</span>
+              <span class="content-interest">{item}</span>
+              <span class="tag">{"</li>"}</span>
+            </div>
+          ))
+        }
+
         <div class="code-line">
           <span class="tag">{`</${interests.tag}>`}</span>
         </div>
       </div>
     </div>
-    
-    <a href="#contact" class="cta">Get in touch →</a>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="prompt">kenibluez@portfolio:~$</span>
+        <span class="command">whoami</span>
+      </div>
+      <div class="terminal-body">
+        {
+          about.map((line) => (
+            <p class="abt__info" set:html={line} />
+          ))
+        }
+      </div>
+    </div>
+    <div class="abt__tech-stack">
+      {techStack.map((tech) => <Badge>{tech}</Badge>)}
+    </div>
   </div>
 </section>
 
 <script>
   import { initParticlePortrait } from "../scripts/particlePortrait";
 
-  const canvas = document.getElementById("particle-canvas") as HTMLCanvasElement | null;
+  const canvas = document.getElementById(
+    "particle-canvas",
+  ) as HTMLCanvasElement | null;
   const portraitData = document.getElementById("portrait-data");
 
   if (canvas && portraitData && portraitData.textContent) {
@@ -87,14 +108,40 @@ const { info, interests } = aboutData;
     display: block;
   }
 
+  .abt__info {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--foreground);
+    font-size: var(--fs-base);
+  }
+
+  .abt__info :global(strong) {
+    color: var(--accent);
+    font-weight: 900;
+  }
+
+  .abt__info :global(em) {
+    color: white;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .abt__tech-stack {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
   /* Terminal Styles */
   .terminal {
-    background: rgba(10, 25, 50, 0.3);
+    background: rgb(6, 10, 16);
     border: 2px solid var(--accent);
     border-radius: 4px;
     box-shadow: 0 0 2rem rgba(36, 91, 255, 0.15);
     overflow: hidden;
-    font-family: var(--font-accent);
+    /* font-family: var(--font-accent); */
     margin-bottom: 2rem;
   }
 

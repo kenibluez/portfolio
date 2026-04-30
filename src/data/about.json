@@ -2,12 +2,36 @@
   "info": {
     "name": { "tag": "h1", "value": "Kenneth Herrera" },
     "nickname": { "tag": "h3", "value": "kenibluez" },
-    "title": { "tag": "p", "value": "Software Engineer" },
+    "role": { "tag": "p", "value": "Software Engineer" },
     "location": { "tag": "p", "value": "Chinandega, Nicaragua" },
     "dob": { "tag": "span", "value": "Born in 2006-07-14" }
   },
   "interests": {
     "tag": "ul",
     "items": ["Web Development", "3D Graphics", "Open Source"]
-  }
+  },
+  "about": [
+    "Hi, I'm <strong>Kenneth</strong>, but you can call me <em>keni</em>.",
+    "I build apps, design interfaces, experiment with game development, and explore things like Math, ML, AI, and whatever tech topic steals my attention this week.",
+    "I’m currently finishing my <em>software engineering degree</em>, freelancing, and working on <strong>side projects</strong> that usually start as “small ideas” and somehow become full ecosystems.",
+    "I like minimalist applications, clean UI, music, art, and making things that <strong>feel good to use</strong>.",
+    "<em>Simple on the outside. Slightly chaotic in the source code.</em>"
+  ],
+  "techStack": [
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "PHP",
+    "C#",
+    "React",
+    "NextJS",
+    "Express",
+    "Expo (React Native)",
+    "FastAPI",
+    "Laravel",
+    "Git",
+    "MySQL, PostgreSQL",
+    "Mermaid",
+    "Figma"
+  ]
 }
