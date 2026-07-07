@@ -9,26 +9,29 @@ import { Icon } from "astro-icon/components";
     </p>
 
     <div class="quick-links">
-      <div class="quick">
+      <a href="#about" class="quick">
         <Icon name="lucide:user" color="var(--accent)" size="1.1em" />
         <p>About</p>
-      </div>
-      <div class="quick">
-        <Icon name="lucide:folder-open" color="var(--accent)" size="1.1em" />
-        <p>Projects</p>
-      </div>
-      <div class="quick">
+      </a>
+
+      <a href="#experience" class="quick">
         <Icon
           name={"lucide:briefcase-business"}
           color="var(--accent)"
           size="1.1em"
         />
         <p>Experience</p>
-      </div>
-      <div class="quick">
+      </a>
+
+      <a href="#projects" class="quick">
+        <Icon name="lucide:folder-open" color="var(--accent)" size="1.1em" />
+        <p>Projects</p>
+      </a>
+
+      <a href="#blog" class="quick">
         <Icon color="var(--accent)" name="lucide:book-open" size="1.1em" />
         <p>Blog</p>
-      </div>
+      </a>
     </div>
 
     <div class="external">
@@ -58,26 +61,26 @@ import { Icon } from "astro-icon/components";
 
     <div class="sidebar-content">
       <div class="sidebar-links">
-        <div class="quick">
+        <a href="#about" class="quick">
           <Icon name="lucide:user" color="var(--accent)" size="1.2em" />
           <p>About</p>
-        </div>
-        <div class="quick">
-          <Icon name="lucide:folder-open" color="var(--accent)" size="1.2em" />
-          <p>Projects</p>
-        </div>
-        <div class="quick">
+        </a>
+        <a href="#experience" class="quick">
           <Icon
             name={"lucide:briefcase-business"}
             color="var(--accent)"
             size="1.2em"
           />
           <p>Experience</p>
-        </div>
-        <div class="quick">
+        </a>
+        <a href="#projects" class="quick">
+          <Icon name="lucide:folder-open" color="var(--accent)" size="1.2em" />
+          <p>Projects</p>
+        </a>
+        <a href="#blog" class="quick">
           <Icon color="var(--accent)" name="lucide:book-open" size="1.2em" />
           <p>Blog</p>
-        </div>
+        </a>
       </div>
 
       <div class="sidebar-footer">
@@ -113,10 +116,31 @@ import { Icon } from "astro-icon/components";
   closeBtn?.addEventListener("click", toggleSidebar);
   overlay?.addEventListener("click", toggleSidebar);
 
-  // Close sidebar on link click
-  const links = document.querySelectorAll(".sidebar-links .quick");
-  links.forEach((link) => {
-    link.addEventListener("click", toggleSidebar);
+  // Close sidebar and scroll smoothly on link click
+  const quickLinks = document.querySelectorAll(".quick");
+  quickLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        // If it's a sidebar link, close the sidebar first
+        if (link.closest(".sidebar-links")) {
+          toggleSidebar();
+        }
+
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+          // Update URL hash without causing a page jump
+          history.pushState(null, "", href);
+        }
+      }
+    });
   });
 </script>
 
@@ -174,6 +198,8 @@ import { Icon } from "astro-icon/components";
     gap: 0.4rem;
     cursor: pointer;
     transition: opacity 0.2s;
+    text-decoration: none;
+    color: inherit;
   }
 
   .quick:hover {
@@ -243,12 +269,12 @@ import { Icon } from "astro-icon/components";
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
-  
+
   .sidebar-overlay.active {
     opacity: 1;
     pointer-events: all;
   }
-  
+
   .sidebar {
     position: fixed;
     top: 0;
