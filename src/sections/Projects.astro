@@ -1,0 +1,554 @@
+---
+import projects from "../data/projects.json";
+import Badge from "../components/Badge.astro";
+---
+
+<section class="projects" id="projects">
+  <div class="projects__container">
+    <div class="projects__header">
+      <div class="cyber-badge">
+        <span class="badge-prefix">//</span>
+        <span>DEPLOYMENTS_</span>
+      </div>
+      <h2 class="projects__title">
+        SYSTEM.<span class="neon-glow">PROJECTS</span>(<span
+          class="typing-container"
+          ><span id="typewriter-text"></span><span class="typing-cursor">_</span
+          ></span
+        >)
+      </h2>
+      <p class="projects__subtitle">
+        Executing public repositories and software modules from the grid.
+      </p>
+      <div class="cyber-line">
+        <div class="line-dot"></div>
+      </div>
+    </div>
+
+    <div class="projects__grid">
+      {
+        projects.map((project) => (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card"
+          >
+            <div class="scan-line" />
+            <div class="card-inner">
+              <div class="card-top">
+                <div class="system-status">
+                  <span class="status-dot" />
+                  <span>ONLINE</span>
+                </div>
+                {project.stars > 0 && (
+                  <span class="stars-badge">★ {project.stars}</span>
+                )}
+              </div>
+
+              <h3 class="project-name">{project.name}</h3>
+              <p class="project-desc">{project.description}</p>
+
+              <div class="project-tags">
+                <span class="tag-label">STACK:</span>
+                <div class="tag-list">
+                  {project.technologies.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tag-label">SKILLS:</span>
+                <div class="tag-list">
+                  {project.skills.map((skill) => (
+                    <span class="skill-tag">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <span class="card-lang">{project.language}</span>
+                <span class="view-link">git checkout ➔</span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function initTypewriter() {
+    const typewriterElement = document.getElementById("typewriter-text");
+    if (!typewriterElement) return;
+
+    const words = ["airbluez", "tm-simulator", "source_code", "web_modules"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingSpeed = 120;
+    const deletingSpeed = 60;
+    const delayBetweenWords = 2000;
+
+    function type() {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let currentSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        currentSpeed = delayBetweenWords;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        currentSpeed = 500;
+      }
+
+      setTimeout(type, currentSpeed);
+    }
+
+    type();
+  }
+
+  // Run immediately
+  initTypewriter();
+</script>
+
+<style>
+  .projects {
+    padding: 8rem 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    scroll-margin-top: 5rem;
+  }
+
+  .projects__container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  /* Cyberpunk Header Style */
+  .projects__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cyber-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-accent);
+    color: var(--primary);
+    text-shadow: 0 0 8px rgba(0, 145, 255, 0.4);
+    font-size: var(--fs-sm);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .badge-prefix {
+    color: var(--secondary);
+  }
+
+  .projects__title {
+    font-family: var(--font-accent);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--foreground);
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Neon Glow and Flicker Effect */
+  .neon-glow {
+    color: #fff;
+    animation: neon-flicker 5s infinite alternate;
+  }
+
+  @keyframes neon-flicker {
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 10px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px var(--primary),
+        0 0 60px var(--primary);
+    }
+    20%,
+    24%,
+    55% {
+      text-shadow:
+        0 0 2px rgba(255, 255, 255, 0.3),
+        0 0 5px rgba(0, 145, 255, 0.2);
+    }
+  }
+
+  /* Typewriter Styling */
+  .typing-container {
+    color: var(--secondary);
+    text-shadow: 0 0 8px rgba(88, 46, 255, 0.6);
+    font-family: var(--font-accent);
+    text-transform: lowercase;
+  }
+
+  .typing-cursor {
+    animation: blink 0.8s infinite;
+    color: var(--secondary);
+    font-weight: bold;
+    margin-left: 1px;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .projects__subtitle {
+    font-size: var(--fs-md);
+    color: var(--foreground);
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .cyber-line {
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .line-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+    transform: rotate(45deg);
+  }
+
+  /* Projects Grid */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+  }
+
+  /* Cyber Deck Project Card */
+  .project-card {
+    position: relative;
+    background: rgba(6, 11, 22, 0.65);
+    border: 1px solid rgba(36, 91, 255, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 0 20px rgba(36, 91, 255, 0.03);
+  }
+
+  /* Laser Scanning Line Sweep */
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 145, 255, 0.03) 40%,
+      rgba(0, 145, 255, 0.25) 50%,
+      rgba(0, 145, 255, 0.03) 60%,
+      transparent 100%
+    );
+    background-size: 100% 200%;
+    background-position: 0 -100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .project-card:hover .scan-line {
+    opacity: 1;
+    animation: scanSweep 6s linear infinite;
+  }
+
+  @keyframes scanSweep {
+    0% {
+      opacity: 1;
+      background-position: 0 -100%;
+    }
+    30% {
+      background-position: 0 100%;
+    }
+    30.001%,
+    100% {
+      opacity: 0;
+      background-position: 0 100%;
+    }
+  }
+
+  /* Glowing Corner Accents */
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid var(--primary);
+    border-left: 2px solid var(--primary);
+    transition: all 0.3s ease;
+    z-index: 3;
+  }
+
+  .project-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid var(--secondary);
+    border-right: 2px solid var(--secondary);
+    transition: all 0.3s ease;
+    z-index: 3;
+  }
+
+  .project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 145, 255, 0.6);
+    box-shadow:
+      0 15px 35px rgba(36, 91, 255, 0.2),
+      0 5px 15px rgba(88, 46, 255, 0.1),
+      inset 0 0 15px rgba(0, 145, 255, 0.08);
+  }
+
+  .project-card:hover::before {
+    width: 16px;
+    height: 16px;
+    border-color: var(--primary);
+  }
+
+  .project-card:hover::after {
+    width: 16px;
+    height: 16px;
+    border-color: var(--secondary);
+  }
+
+  .card-inner {
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .system-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    font-family: var(--font-accent);
+    color: #00ff88;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #00ff88;
+    animation: statusPulse 2s infinite;
+  }
+
+  @keyframes statusPulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.3);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .stars-badge {
+    font-size: var(--fs-sm);
+    color: #ffd700;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
+    font-family: var(--font-accent);
+  }
+
+  .project-name {
+    margin: 0 0 1rem 0;
+    font-size: var(--fs-lg);
+    font-weight: 800;
+    color: var(--primary);
+    text-shadow: 0 0 8px rgba(0, 145, 255, 0.15);
+    font-family: var(--font-accent);
+    letter-spacing: 0.5px;
+    text-transform: lowercase;
+  }
+
+  .project-name::before {
+    content: "> ";
+    color: var(--secondary);
+    text-shadow: none;
+  }
+
+  .project-desc {
+    font-size: var(--fs-md);
+    color: var(--foreground);
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+    opacity: 0.9;
+  }
+
+  /* Tag Styling */
+  .project-tags {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-size: var(--fs-sm);
+  }
+
+  .tag-label {
+    font-family: var(--font-accent);
+    font-weight: bold;
+    color: var(--foreground);
+    opacity: 0.6;
+    min-width: 55px;
+    padding-top: 0.1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tech-tag {
+    color: var(--primary);
+    background: rgba(0, 145, 255, 0.05);
+    border: 1px solid rgba(0, 145, 255, 0.2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-accent);
+  }
+
+  .skill-tag {
+    color: var(--secondary);
+    background: rgba(88, 46, 255, 0.05);
+    border: 1px dashed rgba(88, 46, 255, 0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-accent);
+  }
+
+  /* Card Footer styling */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(36, 91, 255, 0.1);
+  }
+
+  .card-lang {
+    font-size: var(--fs-sm);
+    font-family: var(--font-accent);
+    color: var(--foreground);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .view-link {
+    font-size: var(--fs-sm);
+    font-family: var(--font-accent);
+    color: var(--accent);
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .view-link {
+    color: var(--primary);
+    text-shadow: 0 0 8px rgba(0, 145, 255, 0.4);
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 900px) {
+    .projects {
+      padding: 6rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects__grid {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .card-inner {
+      padding: 1.5rem;
+    }
+  }
+</style>
