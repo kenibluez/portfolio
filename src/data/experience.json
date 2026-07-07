@@ -1,5 +1,30 @@
 [
   {
+    "key": "operator-pharaohs",
+    "title": "Casino Floor Operator",
+    "subtitle": "Casino Operations, Technical Troubleshooting, and Customer Support",
+    "org": "Zona Pharaohs Chinandega",
+    "period": "May 2026 - Today",
+    "cmd": "diagnose-system --component=slots-network",
+    "bullets": [
+      "Operated and monitored <strong>casino floor activities</strong>, providing direct <em>customer support</em> and ensuring optimal performance of gaming machines.",
+      "Diagnosed and resolved <strong>machine errors</strong>, performing <em>technical inspections</em> on internal components (CPU, bill validators, printers, and network systems) and coordinating with surveillance teams for operational verification.",
+      "Managed <strong>check-in/check-out processes</strong>, handled payouts and jackpots, and maintained accurate communication using internal <em>operational codes</em>.",
+      "Conducted <strong>opening and closing procedures</strong>, including machine meter verification, <em>system status checks</em>, and report generation for daily operations.",
+      "Ensured compliance with <strong>safety, operational, and customer service standards</strong> in a high-paced environment."
+    ],
+    "skills": [
+      "Casino Floor Operations",
+      "Technical Diagnostics",
+      "Hardware Maintenance (CPU, Bill Validators, Printers)",
+      "Network Troubleshooting",
+      "Cash Handling & Payouts",
+      "Operational Communication",
+      "Reporting & Auditing",
+      "Customer Service & Safety Standards"
+    ]
+  },
+  {
     "key": "developer-internship-keiser",
     "title": "Developer Internship",
     "subtitle": "Automation, Integration, and Frontend Development",
