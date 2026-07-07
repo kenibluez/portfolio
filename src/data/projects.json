@@ -1,0 +1,42 @@
+[
+  {
+    "name": "airbluez",
+    "description": "A real-time, gesture-driven virtual instrument that transforms hand movements into musical chords using computer vision and machine learning.",
+    "url": "https://github.com/kenibluez/airbluez",
+    "language": "Python",
+    "stars": 0,
+    "technologies": [
+      "Python",
+      "MediaPipe",
+      "scikit-learn",
+      "Pyo",
+      "Pygame"
+    ],
+    "skills": [
+      "Computer Vision",
+      "Machine Learning",
+      "Digital Signal Processing",
+      "HCI"
+    ]
+  },
+  {
+    "name": "tm-simulator",
+    "description": "Interactive Web Turing Machine Simulator to visualize, test, and run custom Turing machines.",
+    "url": "https://github.com/kenibluez/tm-simulator",
+    "language": "TypeScript",
+    "stars": 0,
+    "technologies": [
+      "TypeScript",
+      "HTML5",
+      "CSS3",
+      "Vite",
+      "NextJS"
+    ],
+    "skills": [
+      "Theory of Computation",
+      "Algorithms",
+      "State Machines",
+      "Interactive UI"
+    ]
+  }
+]
